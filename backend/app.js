@@ -9,7 +9,11 @@ const jwt = require('jsonwebtoken');
 const app = express();
 require('dotenv').config();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: `${process.env.FRONTEND_URL}`,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+}));
 app.use(express.urlencoded({ extended: true }));
 
 const port = 5000;
@@ -87,7 +91,7 @@ app.post('/login', async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user.id, email: user.email }, secret_key, { expiresIn: '5h' });
-        res.status(200).json({ message: "Login successful!", token });
+        res.status(200).json({ message: "Login successful!", token, loggedIn: "true" });
     } catch (err) {
         console.log("Error while logging in:", err);
         res.status(500).send({ message: "Internal server error" });
@@ -147,23 +151,6 @@ app.post('/fetch-documents', async (req, res) => {
 });
 
 
-app.get('/view-document/:id', async (req, res) => {
-    try {
-        const documentId = req.params.id;
-
-        const document = await documentData.findById(documentId);
-
-        if (!document) {
-            return res.status(404).send({ message: 'Document not found' });
-        }
-
-        res.set('Content-Type', `application/${document.documentType.toLowerCase()}`);
-        res.send(document.file);
-    } catch (err) {
-        console.error('Error viewing document:', err);
-        res.status(500).send({ message: 'Internal server error' });
-    }
-});
 
 app.get('/download-document/:id', async (req, res) => {
     try {
