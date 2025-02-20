@@ -26,7 +26,7 @@ export default function DocumentUpload() {
         formData.append('userEmail', localStorage.getItem('email'));  // Replace with actual user's email, ideally from context or auth
 
         try {
-            const response = await axios.post('http://localhost:5000/upload-document', formData, {
+            const response = await axios.post(`${process.env.BACKEND_URL}/upload-document`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
