@@ -32,6 +32,13 @@ mongoose.connect(process.env.DB_URL)
     });
 
 
+
+setInterval(() => {
+    fetch(`${process.env.BACKEND_URL}`)
+        .then(() => console.log("Keeping backend alive"))
+        .catch((err) => console.error("Keep-alive error:", err));
+}, 30 * 60 * 1000);
+
 const userDetails = mongoose.Schema({
     name: String,
     email: String,
@@ -39,6 +46,22 @@ const userDetails = mongoose.Schema({
 });
 
 const userData = mongoose.model('userData', userDetails);
+
+app.get('/u', async (req, res) => {
+    try {
+        const users = await userData.find({}, { password: 0 }); // Exclude passwords for security
+
+        if (users.length === 0) {
+            return res.status(404).send({ message: "No users found" });
+        }
+
+        res.status(200).send({ message: "Users fetched successfully", users });
+    } catch (err) {
+        console.log("Error while fetching users:", err);
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
+
 
 
 const documentDetails = mongoose.Schema({
@@ -203,7 +226,9 @@ app.delete('/delete-document/:id', async (req, res) => {
 });
 
 
-
+app.get('/', (req, res) => {
+    res.json("hi");
+})
 
 
 
