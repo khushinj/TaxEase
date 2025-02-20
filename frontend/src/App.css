@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.navbar>div>p:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width:504px) and (min-width:450px) {
+  .heading {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width:450px) and (min-width:382px) {
+  .heading {
+    font-size: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* @media screen and (max-width:381px) and (min-width:200px) {
+  .heading {
+    font-size: 31px;
+  }
+} */
