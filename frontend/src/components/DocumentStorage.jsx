@@ -28,7 +28,7 @@ export default function DocumentStorage() {
             if (response.data.documents) {
                 setDocuments(response.data.documents);
             } else {
-                setError("No documents found.");
+                setError("No documents found");
             }
         } catch (err) {
             console.log(`Error fetching documents: ${err}`);
