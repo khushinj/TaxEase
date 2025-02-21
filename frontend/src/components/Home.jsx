@@ -3,6 +3,7 @@ import taxbg from '../images/Taxbg.jpeg';
 import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom';
 import FeatureCards from './FeatureCards';
+import Footer from './Footer';
 
 export default function Home() {
     const navigate = useNavigate();
@@ -23,8 +24,8 @@ export default function Home() {
                             <button className='text-emerald-700 hover:scale-105 transition-transform duration-300 bg-slate-100 font-medium py-2 px-4 rounded-lg' onClick={() => { navigate('/taxCalculator') }}>
                                 Calculate my Tax savings
                             </button>
-                            <button className='bg-emerald-900 py-2 border border-emerald-600 px-4 rounded-lg'>
-                                Learn how it works
+                            <button className='bg-emerald-900 py-2 border border-emerald-600 px-4 rounded-lg' onClick={() => { navigate('/itr-guide') }} >
+                                How To File ITR
                             </button>
                         </div>
                     </div>
@@ -37,6 +38,7 @@ export default function Home() {
             </div>
             <FeatureCards />
 
+            <Footer />
         </div>
     );
 }

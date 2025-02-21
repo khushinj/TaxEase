@@ -23,7 +23,7 @@ export default function DocumentStorage() {
 
         try {
             const userEmail = localStorage.getItem('email');
-            const response = await axios.post(`${process.env.BACKEND_URL}/fetch-documents`, { userEmail });
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/fetch-documents`, { userEmail });
 
             if (response.data.documents) {
                 setDocuments(response.data.documents);
@@ -44,7 +44,7 @@ export default function DocumentStorage() {
 
     const handleDownload = async (docId) => {
         try {
-            const response = await axios.get(`${process.env.BACKEND_URL}/download-document/${docId}`, {
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/download-document/${docId}`, {
                 responseType: 'blob',
             });
             const blob = new Blob([response.data], { type: 'application/octet-stream' });
@@ -61,7 +61,7 @@ export default function DocumentStorage() {
 
     const handleDelete = async (docId) => {
         try {
-            await axios.delete(`${process.env.BACKEND_URL}/delete-document/${docId}`);
+            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/delete-document/${docId}`);
             setDocuments(documents.filter(doc => doc._id !== docId));;
         } catch (err) {
             console.error('Error deleting document:', err);

@@ -7,6 +7,7 @@ import Home from './components/Home';
 import DocumentStorage from './components/DocumentStorage';
 import TaxCalculator from './components/TaxCalculator';
 import HowItWorks from './components/HowItWorks';
+import ITRGuide from './components/ITRGuide';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/documentStorage' element={<DocumentStorage />} />
         <Route path='/taxCalculator' element={<TaxCalculator />} />
         <Route path='/how' element={<HowItWorks />} />
+        <Route path='/itr-guide' element={<ITRGuide />} />
       </Routes>
     </Router>
   );

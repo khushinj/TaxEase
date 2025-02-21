@@ -10,7 +10,7 @@ const app = express();
 require('dotenv').config();
 app.use(express.json());
 app.use(cors({
-    origin: `${process.env.FRONTEND_URL}`,
+    origin: [process.env.FRONTEND_URL, 'http://localhost:3000'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }));
@@ -114,7 +114,7 @@ app.post('/login', async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user.id, email: user.email }, secret_key, { expiresIn: '5h' });
-        res.status(200).json({ message: "Login successful!", token, loggedIn: "true" });
+        res.status(200).json({ message: "Login successful!", token });
     } catch (err) {
         console.log("Error while logging in:", err);
         res.status(500).send({ message: "Internal server error" });

@@ -13,7 +13,7 @@ export default function DocumentUpload() {
     const handleUpload = async (e) => {
         e.preventDefault(); // Prevent the form from reloading the page
 
-        if (!file || !documentName || !documentType) {
+        if (!file || !documentName) {
             alert("Please fill all fields and select a file.");
             return;
         }
@@ -22,11 +22,11 @@ export default function DocumentUpload() {
         const formData = new FormData();
         formData.append('document', file);
         formData.append('documentName', documentName);
-        formData.append('documentType', documentType);
+        formData.append('documentType', 'PDF');
         formData.append('userEmail', localStorage.getItem('email'));  // Replace with actual user's email, ideally from context or auth
 
         try {
-            const response = await axios.post(`${process.env.BACKEND_URL}/upload-document`, formData, {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload-document`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -53,7 +53,7 @@ export default function DocumentUpload() {
             <div className="min-h-screen flex items-center justify-center ">
                 <form onSubmit={handleUpload} className="border border-black rounded-xl p-8 rounded-md shadow-md">
                     <h1 className="text-2xl font-semibold mb-2 text-center">Upload Your Document</h1>
-                    <p className='text-center mb-5'>Acceptable formats: PNG, JPEG, JPG, PDF</p>
+                    <p className='text-center mb-5'>Acceptable formats: PDF</p>
 
                     <input
                         type="text"
@@ -63,7 +63,7 @@ export default function DocumentUpload() {
                         className="border border-gray-300 p-2 rounded-md w-full mb-4"
                     />
 
-                    <select
+                    {/* <select
                         value={documentType}
                         onChange={(e) => setDocumentType(e.target.value)}
                         className="border border-gray-300 p-2 rounded-md w-full mb-4"
@@ -73,7 +73,7 @@ export default function DocumentUpload() {
                         <option value="PNG">PNG</option>
                         <option value="JPEG">JPEG</option>
                         <option value="JPG">JPG</option>
-                    </select>
+                    </select> */}
 
                     <input
                         type="file"

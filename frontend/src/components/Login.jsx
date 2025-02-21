@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoChevronBack } from "react-icons/io5";
+import axios from 'axios';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
-
-    // Check login state on mount
-    // useEffect(() => {
-    //     const storedUser = localStorage.getItem('user');
-    //     if (storedUser) {
-    //         setIsLoggedIn(true);
-    //         navigate('/'); // Redirect if already logged in
-    //     }
-    // }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,27 +16,20 @@ export default function Login() {
         setSuccess('');
 
         try {
-            const res = await fetch(`${process.env.BACKEND_URL}/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password }),
+            const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+                email,
+                password,
             });
 
-            const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.message || 'Login failed');
-            }
-
             localStorage.setItem('user', JSON.stringify({ email, token: data.token }));
-            setSuccess('Login successful!');
-            setIsLoggedIn(true);
-            localStorage.setItem('email',email);
+            localStorage.setItem('email', email);
             localStorage.setItem('loggedIn', true);
+
+            setSuccess('Login successful!');
 
             navigate('/');
         } catch (err) {
-            setError(err.message);
+            setError(err.response?.data?.message || 'Login failed');
         }
     };
 

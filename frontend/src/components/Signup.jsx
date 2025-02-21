@@ -17,7 +17,7 @@ export default function Signup() {
         setError('');
         setSuccess('');
         try {
-            const res = await axios.post(`${process.env.BACKEND_URL}/signup`, {
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
                 name,
                 email,
                 password,
@@ -25,6 +25,9 @@ export default function Signup() {
             console.log(res);
             if (res.data.message) {
                 setSuccess(res.data.message);
+                setInterval(() => {
+                    navigate('/login');
+                }, 900);
             }
         } catch (err) {
             if (err.response && err.response.data) {
