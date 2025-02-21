@@ -12,12 +12,12 @@ const bcrypt = require('bcryptjs');
 require('dotenv').config();
 app.use(express.json());
 app.use(helmet());
-// app.use(cors({
-//     origin: [`${process.env.FRONTEND_URL}`, 'http://localhost:3000'],
-//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//     credentials: true
-// }));
+app.use(cors({
+    origin: [`${process.env.FRONTEND_URL}`, 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 app.options('*', cors()); // Handles preflight requests for all routes
 
 app.use(express.urlencoded({ extended: true }));
