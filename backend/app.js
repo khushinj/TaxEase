@@ -8,17 +8,17 @@ const path = require('path');
 const helmet = require('helmet');
 const jwt = require('jsonwebtoken');
 const app = express();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 app.use(express.json());
 app.use(helmet());
-// app.use(cors({
-//     origin: [process.env.FRONTEND_URL, 'http://localhost:3000'],
-//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//     credentials: true
-// }));
-app.options('*', cors()); // Handles preflight requests for all routes
+app.use(cors({
+    origin: [`${process.env.FRONTEND_URL}`, 'http://localhost:3000'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
+// app.options('*', cors()); // Handles preflight requests for all routes
 
 app.use(express.urlencoded({ extended: true }));
 
