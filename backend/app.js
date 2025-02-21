@@ -5,16 +5,21 @@ const cors = require('cors');
 const Grid = require('gridfs-stream');
 const { MongoClient } = require('mongodb');
 const path = require('path');
+const helmet = require('helmet');
 const jwt = require('jsonwebtoken');
 const app = express();
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 app.use(express.json());
-app.use(cors({
-    origin: [process.env.FRONTEND_URL, 'http://localhost:3000'],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-}));
+app.use(helmet());
+// app.use(cors({
+//     origin: [process.env.FRONTEND_URL, 'http://localhost:3000'],
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//     credentials: true
+// }));
+app.options('*', cors()); // Handles preflight requests for all routes
+
 app.use(express.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 5000;
@@ -86,11 +91,13 @@ app.post('/signup', async (req, res) => {
         const user = await userData.findOne({ email });
 
         if (user) {
-            res.status(400).send({ message: "User already exists" });
+            return res.status(400).send({ message: "User already exists" });
         }
 
-        const newUser = new userData({ name, email, password });
+        const hashedPassword = await bcrypt.hash(password, 10); // Hash password
+        const newUser = new userData({ name, email, password: hashedPassword });
         await newUser.save();
+
         res.status(200).send({ message: "Signed Up successfully!", newUser });
     } catch (err) {
         console.log("Error while signing up:", err);
@@ -98,20 +105,18 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await userData.findOne({ email });
 
         if (!user) {
-            res.status(400).send({ message: "Email does not exist!" });
-            return;
+            return res.status(400).send({ message: "Email does not exist!" });
         }
 
-        if (password !== user.password) {
-            res.status(400).send({ message: "Incorrect password" });
-            return;
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).send({ message: "Incorrect password" });
         }
 
         const token = jwt.sign({ userId: user.id, email: user.email }, secret_key, { expiresIn: '5h' });
@@ -123,11 +128,24 @@ app.post('/login', async (req, res) => {
 });
 
 
+
+const authenticateToken = (req, res, next) => {
+    const token = req.header('Authorization');
+    if (!token) return res.status(401).send({ message: "Access Denied" });
+
+    jwt.verify(token, secret_key, (err, user) => {
+        if (err) return res.status(403).send({ message: "Invalid Token" });
+        req.user = user;
+        next();
+    });
+};
+
+
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 
-app.post('/upload-document', upload.single('document'), async (req, res) => {
+app.post('/upload-document', authenticateToken, upload.single('document'), async (req, res) => {
     try {
         const { userEmail, documentName, documentType } = req.body;
         const file = req.file;

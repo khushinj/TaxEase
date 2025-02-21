@@ -10,7 +10,7 @@ export default function Footer() {
                 <div className="flex flex-wrap justify-between">
                     {/* Logo and Description */}
                     <div className="w-full md:w-1/3 mb-6 md:mb-0">
-                        <h2 className="text-2xl font-bold">YourCompany</h2>
+                        <h2 className="text-2xl font-bold">TaxEase</h2>
                         <p className="mt-2 text-gray-800">
                             Providing reliable solutions since 2025.
                         </p>
@@ -30,18 +30,18 @@ export default function Footer() {
                                 </a>
                             </li>
                             <li>
-                                <a href="/services" className="text-gray-800 hover:text-white">
-                                    Services
+                                <a href="/taxCalculator" className="text-gray-800 hover:text-white">
+                                    TaxSaver
                                 </a>
                             </li>
                             <li>
-                                <a href="/contact" className="text-gray-800 hover:text-white">
-                                    Contact
+                                <a href="/documentStorage" className="text-gray-800 hover:text-white">
+                                    DocVault
                                 </a>
                             </li>
                         </ul>
                     </div>
-                    {/* Social Media Links */}
+
                     <div className="w-full md:w-1/3">
                         <h3 className="text-xl font-semibold">Follow Us</h3>
                         <div className="mt-2 flex space-x-4">
