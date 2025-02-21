@@ -8,6 +8,7 @@ export default function DocumentUpload() {
     const [documentName, setDocumentName] = useState("");
     const [documentType, setDocumentType] = useState("");
     const navigate = useNavigate();
+    const token = localStorage.getItem('token');
 
     // Handle form submission and file upload
     const handleUpload = async (e) => {
@@ -24,11 +25,11 @@ export default function DocumentUpload() {
         formData.append('documentName', documentName);
         formData.append('documentType', 'PDF');
         formData.append('userEmail', localStorage.getItem('email'));  // Replace with actual user's email, ideally from context or auth
-
         try {
             const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload-document`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Authorization': `${token}` // Add token to the request headers
                 },
             });
 
