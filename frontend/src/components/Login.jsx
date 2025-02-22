@@ -25,7 +25,6 @@ export default function Login() {
             localStorage.setItem('email', email);
             localStorage.setItem('loggedIn', true);
             localStorage.setItem('token', data.token)
-            console.log(data.token);
             setSuccess('Login successful!');
             if (data.token) {
                 navigate('/');
