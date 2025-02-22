@@ -39,7 +39,7 @@ export default function Navbar() {
 
                 {/* Desktop Menu (Visible only for non-mobile screens) */}
                 {!isMobile && (
-                    <ul className="hidden md:flex lg:px-10 text-lg md:flex md:flex-row md:rounded-full md:border md:border-gray-100 md:p-4 md:space-x-6">
+                    <ul className="hidden md:flex lg:px-10 text-lg md:flex md:flex-row md:rounded-full md:bg-opacity-50 md:border md:border-gray-100 md:p-4 md:space-x-6">
                         <li>
                             <p className=" px-3 text-gray-900 hover:text-green-500 dark:text-white cursor-pointer" onClick={() => navigate("/")}>Home</p>
                         </li>
