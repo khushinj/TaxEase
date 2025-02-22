@@ -84,12 +84,13 @@ export default function DocumentStorage() {
 
     return (
         <div className="p-5">
-            <h1 className="text-4xl font-semibold text-gray-800 mb-10 text-center">
-                Document Storage
-            </h1>
             <p className='ps-6 flex items-center cursor-pointer' onClick={() => navigate('/')}>
                 <IoChevronBack /> Back
             </p>
+            <h1 className="text-4xl font-semibold text-gray-800 mb-10 text-center mt-4">
+                Document Storage
+            </h1>
+
             <div className="flex justify-end mb-5 me-8">
                 <button className="bg-blue-500 rounded-lg text-white py-2 px-3 flex items-center" onClick={() => navigate('/documentUpload')}>
                     <FaPlus />

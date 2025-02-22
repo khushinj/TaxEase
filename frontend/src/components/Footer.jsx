@@ -63,7 +63,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="mt-8 text-center text-gray-800">
-                    &copy; 2025 YourCompany. All rights reserved.
+                    &copy; 2025 TaxEase. All rights reserved.
                 </div>
             </div>
         </footer>
