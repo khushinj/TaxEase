@@ -8,14 +8,14 @@ export default function Footer() {
         <footer className="bg-white text-black py-8">
             <div className="container mx-auto px-4">
                 <div className="flex flex-wrap justify-between">
-                    {/* Logo and Description */}
+
                     <div className="w-full md:w-1/3 mb-6 md:mb-0">
                         <h2 className="text-2xl font-bold">TaxEase</h2>
                         <p className="mt-2 text-gray-800">
                             Providing reliable solutions since 2025.
                         </p>
                     </div>
-                    {/* Navigation Links */}
+
                     <div className="w-full md:w-1/3 mb-6 md:mb-0">
                         <h3 className="text-xl font-semibold">Quick Links</h3>
                         <ul className="mt-2">

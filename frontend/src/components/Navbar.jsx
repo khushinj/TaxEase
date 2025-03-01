@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import { FiMenu } from "react-icons/fi"; // Importing menu icon
+import { FiMenu } from "react-icons/fi";
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -32,12 +32,12 @@ export default function Navbar() {
     return (
         <nav className="w-full z-20 top-0 start-0 shadow-md">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
-                {/* Logo */}
+
                 <div className="flex items-center space-x-3">
                     <p className="text-2xl font-semibold dark:text-white">TaxEase</p>
                 </div>
 
-                {/* Desktop Menu (Visible only for non-mobile screens) */}
+
                 {!isMobile && (
                     <ul className="hidden md:flex lg:px-10 text-lg md:flex md:flex-row md:rounded-full md:bg-black md:bg-opacity-50 md:border md:border-gray-100 md:p-4 md:space-x-6">
                         <li>
@@ -55,7 +55,7 @@ export default function Navbar() {
                     </ul>
                 )}
 
-                {/* User Icon / Get Started / Burger Icon */}
+
                 <div className="flex md:order-2 space-x-3 md:space-x-0 relative items-center">
                     {!isAuthenticated && (
                         <button
@@ -74,7 +74,7 @@ export default function Navbar() {
                         </button>
                     )}
 
-                    {/* Profile Icon for Mobile */}
+
                     {isAuthenticated && isMobile && (
                         <button
                             className="text-white text-2xl flex items-center"
@@ -84,7 +84,7 @@ export default function Navbar() {
                         </button>
                     )}
 
-                    {/* Profile Dropdown (Desktop) */}
+
                     {isAuthenticated && !isMobile && (
                         <button
                             className="text-white text-2xl flex items-center"
@@ -106,7 +106,7 @@ export default function Navbar() {
                     )}
                 </div>
 
-                {/* Mobile Menu (Visible only on smaller screens) */}
+
                 {isMobile && isMenuOpen && (
                     <div className="absolute top-full left-0 w-full bg-slate-400 z-50 shadow-lg">
                         <ul className="flex flex-col rounded-lg border border-gray-100 p-4">

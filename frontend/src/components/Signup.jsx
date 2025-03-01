@@ -13,16 +13,17 @@ export default function Signup() {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // prevent default form submission
-        setError('');
-        setSuccess('');
+        e.preventDefault(); 
+
         try {
+            setError('');
+            setSuccess('');
             const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
                 name,
                 email,
                 password,
             });
-            console.log(res);
+            // console.log(res);
             if (res.data.message) {
                 setSuccess(res.data.message);
                 setInterval(() => {
@@ -31,7 +32,7 @@ export default function Signup() {
             }
         } catch (err) {
             if (err.response && err.response.data) {
-                setError(err.response.data.message); // handle error message from backend
+                setError(err.response.data.message); 
             } else {
                 setError('An unexpected error occurred.', err);
             }

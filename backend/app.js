@@ -22,6 +22,61 @@ app.options('*', cors()); // Handles preflight requests for all routes
 
 app.use(express.urlencoded({ extended: true }));
 
+const notificationSchema = mongoose.Schema({
+    userEmail: { type: String, required: true },
+    message: { type: String, required: true },
+    isRead: { type: Boolean, default: false },
+    timestamp: { type: Date, default: Date.now }
+});
+
+const Notification = mongoose.model('Notification', notificationSchema);
+
+app.get('/notifications/:userEmail', async (req, res) => {
+    try {
+        const { userEmail } = req.params;
+        const notifications = await Notification.find({ userEmail });
+        res.status(200).send({ message: "Notifications fetched", notifications });
+    } catch (err) {
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
+
+// Create a notification
+app.post('/notifications', async (req, res) => {
+    try {
+        const { userEmail, message } = req.body;
+        const newNotification = new Notification({ userEmail, message });
+        await newNotification.save();
+        res.status(200).send({ message: "Notification created", newNotification });
+    } catch (err) {
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
+
+// Mark notification as read
+app.patch('/notifications/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Notification.findByIdAndUpdate(id, { isRead: true });
+        res.status(200).send({ message: "Notification marked as read" });
+    } catch (err) {
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
+
+// Delete notification
+app.delete('/notifications/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Notification.findByIdAndDelete(id);
+        res.status(200).send({ message: "Notification deleted" });
+    } catch (err) {
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
+
+
+
 const port = process.env.PORT || 5000;
 let gfs;
 const secret_key = process.env.secret_key;
@@ -55,7 +110,7 @@ const userData = mongoose.model('userData', userDetails);
 
 app.get('/u', async (req, res) => {
     try {
-        const users = await userData.find({}, { password: 0 }); // Exclude passwords for security
+        const users = await userData.find({}, { password: 0 });
 
         if (users.length === 0) {
             return res.status(404).send({ message: "No users found" });

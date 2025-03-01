@@ -28,7 +28,6 @@ export default function Login() {
             setSuccess('Login successful!');
             if (data.token) {
                 navigate('/');
-
             }
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed');
@@ -37,9 +36,10 @@ export default function Login() {
 
     return (
         <div className='bg-gray-100'>
-            <p onClick={() => navigate('/')} className='cursor-pointer sm:pt-5 sm:ps-10 ps-5 pt-8 flex items-center'>
+            <button onClick={() => { navigate('/', { replace: true }) }} className='cursor-pointer sm:pt-5 sm:ps-10 ps-5 pt-8 flex items-center'>
                 <IoChevronBack /> Back
-            </p>
+            </button>
+
             <div className="flex items-center justify-center min-h-screen -mt-10">
                 <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md sm:w-full w-11/12">
                     <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Log In</h2>

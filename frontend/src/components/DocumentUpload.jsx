@@ -6,34 +6,34 @@ import axios from 'axios';
 export default function DocumentUpload() {
     const [file, setFile] = useState(null);
     const [documentName, setDocumentName] = useState("");
-    const [documentType, setDocumentType] = useState("");
+    // const [documentType, setDocumentType] = useState("");
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
 
-    // Handle form submission and file upload
+
     const handleUpload = async (e) => {
-        e.preventDefault(); // Prevent the form from reloading the page
+        e.preventDefault();
 
         if (!file || !documentName) {
             alert("Please fill all fields and select a file.");
             return;
         }
 
-        // Create a FormData object and append the necessary data
+
         const formData = new FormData();
         formData.append('document', file);
         formData.append('documentName', documentName);
         formData.append('documentType', 'PDF');
-        formData.append('userEmail', localStorage.getItem('email'));  // Replace with actual user's email, ideally from context or auth
+        formData.append('userEmail', localStorage.getItem('email')); 
         try {
             const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload-document`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': `${token}` // Add token to the request headers
+                    'Authorization': `${token}` 
                 },
             });
 
-            // Handle successful upload
+
             if (response.status === 200) {
                 alert("File uploaded successfully");
                 navigate('/documentStorage');
@@ -54,7 +54,7 @@ export default function DocumentUpload() {
             <div className="min-h-screen flex items-center justify-center ">
                 <form onSubmit={handleUpload} className="border border-black rounded-xl p-8 rounded-md shadow-md">
                     <h1 className="text-2xl font-semibold mb-2 text-center">Upload Your Document</h1>
-                    <p className='text-center mb-5'>Acceptable formats: PDF</p>
+                    <p className='text-center mb-5 font-semibold'>Acceptable formats: PDF</p>
 
                     <input
                         type="text"

@@ -24,7 +24,7 @@ export default function FeatureCards() {
         <div className="my-60 text-center">
             <h1 className='text-center sm:text-6xl text-4xl pb-14'>Why Choose Us?</h1>
 
-            {/* Centering the grid */}
+
             <div className="grid grid-cols-1 lg:grid-cols-3 lg:size-50 gap-8 place-items-center mt-10">
                 {features.map((feature, index) => (
                     <div key={index} className="bg-[#F8F6F6] hover:scale-105 transition-transform duration-300 p-6 rounded-2xl text-center drop-shadow-2xl lg:w-80 lg:h-70 sm:h-auto md:w-3/6 sm:w-90 w-80 h-70 border border-slate-500">
