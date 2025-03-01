@@ -137,7 +137,7 @@ export default function TaxCalculator() {
                     />
                     <button
                         type="submit"
-                        className="w-full bg-emerald-600 text-white  p-2 rounded hover:bg-blue-700"
+                        className="w-full bg-emerald-600 text-white  p-2 rounded hover:bg-green-700"
                     >
                         Calculate My Tax
                     </button>
