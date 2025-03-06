@@ -77,7 +77,7 @@ export default function Login() {
 
                         <button
                             type="submit"
-                            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1"
+                            className="w-full bg-green-700 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1"
                         >
                             Log In
                         </button>
@@ -86,11 +86,11 @@ export default function Login() {
                     {error && (<p className="mt-4 text-center text-sm text-red-500">{error}</p>)}
                     {success && (<p className="mt-4 text-center text-sm text-green-500">{success}</p>)}
 
-                    <p className="mt-4 text-center text-sm text-gray-600">
+                    {/* <p className="mt-4 text-center text-sm text-gray-600">
                         <a href="/forgot-password" className="text-blue-500 hover:underline">
                             Forgot your password?
                         </a>
-                    </p>
+                    </p> */}
 
                     <p className="mt-4 text-center text-sm text-gray-600">
                         Don't have an account?{" "}
