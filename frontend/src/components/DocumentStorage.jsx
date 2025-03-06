@@ -92,7 +92,7 @@ export default function DocumentStorage() {
             </h1>
 
             <div className="flex justify-end mb-5 me-8">
-                <button className="bg-blue-500 rounded-lg text-white py-2 px-3 flex items-center" onClick={() => navigate('/documentUpload')}>
+                <button className="bg-green-700 rounded-lg text-white py-2 px-3 flex items-center" onClick={() => navigate('/documentUpload')}>
                     <FaPlus />
                     <h3 className="px-2">Upload</h3>
                 </button>
@@ -115,7 +115,7 @@ export default function DocumentStorage() {
 
                         <tbody className='h-full'>
                             {documents.map((doc, index) => (
-                                <tr key={index} className="hover:bg-gray-50 relative">
+                                <tr key={index} className=" relative">
                                     <td className="px-4 py-3 border-b border-gray-300 text-gray-800">
                                         {doc.documentName}
                                     </td>
@@ -129,7 +129,7 @@ export default function DocumentStorage() {
                                         }} className="cursor-pointer" />
 
                                         {selectedDoc === doc && (
-                                            <div className="fixed bg-white border shadow-md mt-1 p-2 rounded-lg">
+                                            <div className="absolute left-16 bottom-2 w-28 bg-white border shadow-md mt-1 p-2 rounded-lg">
                                                 <button onClick={() => handleDownload(doc._id)} className="block text-green-600 hover:text-green-800">Download</button>
                                                 <button onClick={() => handleDelete(doc._id)} className="block text-red-600 hover:text-red-800">Delete</button>
                                             </div>
