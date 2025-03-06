@@ -22,7 +22,7 @@ function App() {
         <Route path='/taxCalculator' element={<TaxCalculator />} />
         <Route path='/how' element={<HowItWorks />} />
         <Route path='/itr-guide' element={<ITRGuide />} />
-        <Route path='/s' element={<TaxSavingStrategies />} />
+        <Route path='/strategies' element={<TaxSavingStrategies />} />
       </Routes>
     </Router>
   );

@@ -114,7 +114,7 @@ export default function Navbar() {
                                 <p className="py-2 px-3 text-gray-900 hover:text-green-500 dark:text-white cursor-pointer" onClick={() => navigate("/")}>Home</p>
                             </li>
                             <li>
-                                <p className="py-2 px-3 text-gray-900 hover:text-green-500 dark:text-white cursor-pointer" onClick={() => navigate("/about")}>About</p>
+                                <p className="py-2 px-3 text-gray-900 hover:text-green-500 dark:text-white cursor-pointer" onClick={() => navigate("/strategies")}>Strategies</p>
                             </li>
                             <li>
                                 <p className="py-2 px-3 text-gray-900 hover:text-green-500 dark:text-white cursor-pointer" onClick={() => navigate("/taxCalculator")}>TaxSaver</p>
